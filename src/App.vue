@@ -1,9 +1,5 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <router-view />
 </template>
 
 <style>
@@ -15,16 +11,26 @@
   color: #2c3e50;
 }
 
-nav {
-  padding: 30px;
+.register input,
+.login input,
+.add input {
+  width: 300px;
+  height: 40px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 30px;
+  border: 1px solid skyblue;
+  padding-left: 20px;
 }
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
+.register button,
+.login button,
+.add button {
+  width: 320px;
+  height: 40px;
+  border: 1px solid skyblue;
+  background: skyblue;
+  cursor: pointer;
+  color: #fff;
 }
 </style>
