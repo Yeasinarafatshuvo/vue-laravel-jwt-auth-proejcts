@@ -30,13 +30,24 @@ export default {
         .then((response) => {
           console.log(response.data);
           if (response.status == 201) {
+            localStorage.setItem("user-token", response.data.access_token);
+            this.$router.push({ name: "Home" });
             alert("You are Login successfully");
           }
         })
         .catch((error) => {
+          if (error.response.status == 422) {
+            alert("Please, enter valid email and password");
+          }
           console.log(error);
         });
     },
+  },
+  mounted() {
+    let user = localStorage.getItem("user-token");
+    if (user) {
+      this.$router.push({ name: "Home" });
+    }
   },
 };
 </script>

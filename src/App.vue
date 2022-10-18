@@ -13,7 +13,8 @@
 
 .register input,
 .login input,
-.add input {
+.add input,
+.add_course input {
   width: 300px;
   height: 40px;
   display: block;
@@ -25,7 +26,8 @@
 }
 .register button,
 .login button,
-.add button {
+.add button,
+.add_course button {
   width: 320px;
   height: 40px;
   border: 1px solid skyblue;

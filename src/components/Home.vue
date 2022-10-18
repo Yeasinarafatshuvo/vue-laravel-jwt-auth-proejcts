@@ -10,6 +10,13 @@ export default {
   components: {
     Header,
   },
+
+  mounted() {
+    let user = localStorage.getItem("user-token");
+    if (!user) {
+      this.$router.push({ name: "Login" });
+    }
+  },
 };
 </script>
 
