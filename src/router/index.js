@@ -4,6 +4,7 @@ import AddCourse from "../components/AddCourse.vue";
 import SignUp from "../components/SignUp.vue";
 import Login from "../components/Login.vue";
 import Profile from "../components/Profile.vue";
+import EditCourse from "../components/EditCourse.vue";
 
 const routes = [
   {
@@ -30,6 +31,11 @@ const routes = [
     path: "/user_profile",
     name: "Profile",
     component: Profile,
+  },
+  {
+    path: "/edit_course/:id",
+    name: "EditCourse",
+    component: EditCourse,
   },
 ];
 

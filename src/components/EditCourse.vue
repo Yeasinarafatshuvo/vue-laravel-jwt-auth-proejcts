@@ -1,20 +1,13 @@
 <template>
   <Header />
-  <h1>Add course</h1>
-  <div class="container add_course">
-    <input type="text" placeholder="Enter Course Title" v-model="title" />
-    <input
-      type="text"
-      placeholder="Enter Course Description"
-      v-model="description"
-    />
-    <input
-      type="text"
-      placeholder="Enter total videos"
-      v-model="total_videos"
-    />
-
-    <button @click="add_course">Add Course</button>
+  <div class="container">
+    <h2>Edit Course</h2>
+    <div class="container add_course">
+      <input type="text" v-model="title" />
+      <input type="text" v-model="description" />
+      <input type="text" v-model="total_videos" />
+      <button @click="update_course">Update Course</button>
+    </div>
   </div>
 </template>
 
@@ -22,10 +15,10 @@
 import Header from "../components/Header.vue";
 import axios from "axios";
 export default {
-  name: "AddCourse",
   components: {
     Header,
   },
+
   data() {
     return {
       title: "",
@@ -34,11 +27,10 @@ export default {
     };
   },
   methods: {
-    async add_course() {
-      console.log(this.title, this.description, this.total_videos);
+    async update_course() {
       await axios
-        .post(
-          "http://127.0.0.1:8000/api/course-enroll",
+        .put(
+          "http://127.0.0.1:8000/api/course-update/" + this.$route.params.id,
 
           {
             title: this.title,
@@ -62,11 +54,29 @@ export default {
     },
   },
 
-  mounted() {
+  async mounted() {
     let user = localStorage.getItem("user-token");
     if (!user) {
       this.$router.push({ name: "Login" });
     }
+
+    await axios
+      .get(
+        "http://127.0.0.1:8000/api/get_single_course/" + this.$route.params.id,
+        {
+          headers: {
+            Authorization: `bearer ${localStorage.getItem("user-token")}`,
+          },
+        }
+      )
+      .then((response) => {
+        this.title = response.data.data.title;
+        this.description = response.data.data.description;
+        this.total_videos = response.data.data.total_videos;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   },
 };
 </script>
